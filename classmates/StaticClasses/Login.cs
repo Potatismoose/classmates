@@ -9,7 +9,7 @@ using classmates.StaticClasses;
 
 namespace classmates
 {
-    class Login
+    static class Login
     {
 
         /*
@@ -26,27 +26,30 @@ namespace classmates
             bool loggedIn = default(bool);
             string error = default(string);
             int loginCount = default(int);
+            int maxLoginTries = 3;
             do
             {
                 
                 Console.Clear();
-                //Method to print logo
-                //Outputs.LogoPrint(path[0] + "logo.txt");
+                FileHandling.LogoPrint("start");
 
-                //If wrong password, errormessage is printed in red as long as logincount is less than 3.
-                if (!string.IsNullOrEmpty(error) && loginCount <3)
+                //If wrong password, errormessage is printed in red as long as logincount is less than maxLoginTries.
+                if (!string.IsNullOrEmpty(error) && loginCount <maxLoginTries)
                 {
-                    Console.SetCursorPosition(15, 9);
+                    
+                    Console.SetCursorPosition(15, 10);
                     Print.Red(error);
                     error = default(string);
+                    loginCount++;
+                    
                 }
-                Console.SetCursorPosition(15, 6);
+                Console.SetCursorPosition(15, 7);
                 var pass = default(string);
                 ConsoleKey key;
                 Console.WriteLine("Ange lösenordet (eller q för att avsluta)");
-                Console.SetCursorPosition(15, 7);
-                Print.Grey(@"Lösenord\> ");
-                Console.SetCursorPosition(26, 7);
+                Console.SetCursorPosition(15, 8);
+                Print.Grey(@"Lösenord \> ");
+                Console.SetCursorPosition(26, 8);
 
                 
                 /*
@@ -54,6 +57,7 @@ namespace classmates
                  */
                 if (loginCount >= 3)
                 {
+                    Console.SetCursorPosition(15, 10);
                     Print.Red("Du har skrivit fel lösenord för många gånger. Programmet avslutas");
                     Thread.Sleep(3000);
                     Environment.Exit(0);
@@ -84,21 +88,35 @@ namespace classmates
                     }
                 } while (key != ConsoleKey.Enter);
 
-                // Check if password matches a switch case
-                switch (pass.ToLower())
+                //if password was not entered, set errormessage.
+                if (string.IsNullOrEmpty(pass))
                 {
-                    case "norrlänningarna":
-                    case "1":
-                        loggedIn = true;
+                    error = "Lösenordet kan inte vara tomt.";
+                }
+                // Else, check if password matches a switch case
+                else
+                {
+                    switch (pass.ToLower())
+                    {
+                        case "norrlänningarna":
+                        case "1":
+                            loggedIn = true;
+                            Console.SetCursorPosition(15, 10);
+                            Print.Green("Korrekt lösenord, du loggas nu in");
+                            Thread.Sleep(2000);
 
-                        break;
-                    case "q":
-                        Environment.Exit(0);
-                        break;
-                    default:
-                        error = "Fel lösenord, försök igen";
-                        loginCount++;
-                        break;
+                            break;
+                        case "q":
+                            Environment.Exit(0);
+                            break;
+
+                        case null:
+                        default:
+                            error = "Fel lösenord, försök igen";
+                            
+
+                            break;
+                    }
                 }
             } while (!loggedIn);
 

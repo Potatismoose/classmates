@@ -59,6 +59,13 @@ namespace classmates.ObjectClasses
 
         }
 
+
+
+
+
+        /*-------------------------------------------------------------------------------------
+                 STATIC METHOD FOR POPULATING LIST WITH CLASSMATES FIRST TIME PROGRAM RUNS
+         --------------------------------------------------------------------------------------*/
         public static void Populate(List<Classmates> myClassmates)
         {
 
@@ -171,15 +178,6 @@ namespace classmates.ObjectClasses
                 0,
                 "Att lära sig ett nytt yrke helt från grunden som känns givande."));
 
-
-
-
-
-
-
         }
-
-
-
     }
 }

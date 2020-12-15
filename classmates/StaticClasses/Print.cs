@@ -4,7 +4,7 @@ using System.Text;
 
 namespace classmates.StaticClasses
 {
-    class Print
+    static class Print
     {
         /*
         ---------------------------------------------------------------
