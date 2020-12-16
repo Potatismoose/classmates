@@ -38,7 +38,7 @@ namespace classmates
             Login.UserLogin();
             //If the program had to add any files, then populate that file with the standard classmates
             
-            Menus.StartMenu();
+            Menus.StartMenu(myClassmates);
         }
 
         

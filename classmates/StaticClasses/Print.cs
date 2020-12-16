@@ -23,6 +23,12 @@ namespace classmates.StaticClasses
             Console.WriteLine(text);
             Console.ResetColor();
         }
+        public static void YellowW(string text)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.Write(text);
+            Console.ResetColor();
+        }
         public static void Green(string text)
         {
             Console.ForegroundColor = ConsoleColor.DarkGreen;
@@ -34,6 +40,22 @@ namespace classmates.StaticClasses
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(text);
             Console.ResetColor();
+        
         }
+        public static void Blue(string text)
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            if (text.Contains("alternativ"))
+            {
+                Console.Write(text);
+            }
+            else
+            {
+                Console.WriteLine(text);
+            }
+            Console.ResetColor();
+
+        }
+
     }
 }

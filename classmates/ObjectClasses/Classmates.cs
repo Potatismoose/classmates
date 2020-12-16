@@ -5,6 +5,8 @@ using System.Text;
 using System.Linq;
 using System.IO;
 using System.Reflection;
+using System.Threading;
+using classmates.StaticClasses;
 
 namespace classmates.ObjectClasses
 {
@@ -60,7 +62,106 @@ namespace classmates.ObjectClasses
         }
 
 
+        public void ShowDetails()
+        {
+            string temporaryMotivationString = LookForWhiteSpaceInMotivation(programingMotivation);
+            string temporaryHobbyString = LookForWhiteSpaceInMotivation(hobbie);
+            string temporaryBandString = LookForWhiteSpaceInMotivation(favouriteBand);
 
+            Dictionary<string, object> details = new Dictionary<string, object>{
+                { "Namn",name },
+                { "Ålder", age },
+                { "Längd",  length },
+                { "Bostadsort", city },
+                { "Hobby", temporaryHobbyString },
+                { "Favoritmat", favouriteFood },
+                { "Favoritdryck", favouriteBeverage },
+                { "Favoritband", temporaryBandString },
+                { "Antal barn", noOfChildren },
+                { "Motivation", temporaryMotivationString }
+            };
+
+
+            int top = Console.CursorTop + 6;
+            
+            for (int i = 0; i < details.Count; i++)
+            {
+                Console.SetCursorPosition(35, top);
+                if (details.ElementAt(i).Key == "Hobby" && temporaryHobbyString.Length > 50)
+                {
+
+                    Print.YellowW(details.ElementAt(i).Key);
+                    Console.WriteLine($": {details.ElementAt(i).Value}");
+
+                    if (temporaryHobbyString.Length > 50 && temporaryHobbyString.Length < 130)
+                    { 
+                        top += 1;
+                    }
+                    else if (temporaryHobbyString.Length > 130)
+                    {
+                        top += 2;
+                    }
+                }
+                else if (details.ElementAt(i).Key == "Favoritband" && temporaryBandString.Length > 45)
+                {
+                    Print.YellowW(details.ElementAt(i).Key);
+                    Console.WriteLine($": {details.ElementAt(i).Value}");
+
+                    if (temporaryBandString.Length > 45 && temporaryBandString.Length < 130)
+                    {
+                        top += 1;
+                    }
+                    else if (temporaryBandString.Length > 130)
+                    {
+                        top += 2;
+                    }
+                }
+                else
+                {
+                    Print.YellowW(details.ElementAt(i).Key);
+                    Console.WriteLine($": {details.ElementAt(i).Value}");
+                }
+                top += 1;
+            }
+            
+            Console.WriteLine();
+            Console.SetCursorPosition(35, top+6);
+            Print.Blue("Enter = Fortsätt");
+            Console.ReadKey();
+        }
+
+        private string LookForWhiteSpaceInMotivation(string motivation)
+        {
+            StringBuilder str = new StringBuilder();
+            int counter = 0;
+            for (int i = 0; i < motivation.Length; i++)
+            {
+                counter++;
+                if (char.IsWhiteSpace(motivation[i]) && i > 30)
+                {
+                    if (counter > 42)
+                    {
+                        str.Append("\n");
+                        for (int j = 0; j < 35; j++)
+                        {
+                            str.Append(" ");
+                        }
+                        counter = 0;
+                    }
+                    else
+                    {
+                        str.Append(" ");
+                    }
+                }
+                else
+                {
+                    str.Append(motivation[i]);
+                }
+            }
+
+                
+            return str.ToString();
+        }
 
 
         /*-------------------------------------------------------------------------------------
