@@ -10,10 +10,12 @@ namespace classmates
 {
     static class Start
     {
+
         private static List<Classmates> myClassmates = new List<Classmates>();
 
         public static void StartProgram()
         {
+            Console.Title = "My Classmates";
             if (FileHandling.CheckFileFolderExistance() > 0)
             {
                 Classmates.Populate(myClassmates);

@@ -8,7 +8,7 @@ namespace classmates
     {
         static void Main(string[] args)
         {
-            Console.Title = "Bosses kött och porr";
+            
             Start.StartProgram();
         }
     }

@@ -9,14 +9,15 @@ namespace classmates.StaticClasses
 {
     class Menus
     {
+        
         private static int left = 35;
         private static int top = 7;
 
         private static List<string> startMenu = new List<string>() {
             "Lista alla klasskamrater",
             "Detaljer om klasskamrater",
-            "Infotext om mina klasskamrater",
-            "Redigera en klasskamrat",
+            
+            
             "Ta bort en klasskamrat",
             "Återställ all mockdata",
             "Avsluta programmet" };
@@ -57,11 +58,7 @@ namespace classmates.StaticClasses
                     case 2:
                         Menus.ListDetailsClassmates(listOfClassmates, listBasicClassmatesMenu);
                         break;
-                    case 3:
-
-                        break;
-                    case 4:
-                        break;
+                   
                     case 5:
                         RemoveMenu(listOfClassmates, listBasicClassmatesMenu);
                         break;

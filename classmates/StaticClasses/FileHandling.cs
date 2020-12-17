@@ -100,7 +100,9 @@ namespace classmates.StaticClasses
         //Method for writing the classlist as an object(List with instances of an class) to a file
         public static void BinarySerializer(List<Classmates> list)
         {
+            //Startar en filestream och skapar en BinaryFormatter som jag döper till bd
             FileStream fileStream;
+            
             BinaryFormatter bf = new BinaryFormatter();
             fileStream = File.Create(pathwayFull);
             bf.Serialize(fileStream, list);

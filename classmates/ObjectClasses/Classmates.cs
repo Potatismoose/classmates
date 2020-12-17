@@ -149,10 +149,9 @@ namespace classmates.ObjectClasses
                     if (counter > 42)
                     {
                         str.Append("\n");
-                        for (int j = 0; j < 35; j++)
-                        {
-                            str.Append(" ");
-                        }
+                        
+                        str.Append(' ',35);
+                        
                         counter = 0;
                     }
                     else
