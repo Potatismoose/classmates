@@ -35,6 +35,7 @@ namespace classmates.ObjectClasses
         public int NoOfChildren { get => noOfChildren; set => noOfChildren = value; }
         public string ProgramingMotivation { get => programingMotivation; set => programingMotivation = value; }
 
+        //Constructor for the classmates. Used when mockdata is added
         public Classmates(
             string name, 
             int age, 
@@ -61,13 +62,15 @@ namespace classmates.ObjectClasses
 
         }
 
-
+        //Method for showing personal info
         public void ShowDetails()
         {
-            string temporaryMotivationString = LookForWhiteSpaceInMotivation(programingMotivation);
-            string temporaryHobbyString = LookForWhiteSpaceInMotivation(hobbie);
-            string temporaryBandString = LookForWhiteSpaceInMotivation(favouriteBand);
+            // Three methods for removing whitespaces in strings at a certain point (and replace them with linebreak)
+            string temporaryMotivationString = LookForWhiteSpace(programingMotivation);
+            string temporaryHobbyString = LookForWhiteSpace(hobbie);
+            string temporaryBandString = LookForWhiteSpace(favouriteBand);
 
+            //Dictionary containing the "heading" for the line and the info that should be written out
             Dictionary<string, object> details = new Dictionary<string, object>{
                 { "Namn",name },
                 { "Ålder", age },
@@ -84,12 +87,16 @@ namespace classmates.ObjectClasses
 
             int top = Console.CursorTop + 6;
             
+            /*For loop that prints out the data. Cursor position is moved
+            diferrently depending on how many chars the string contains.
+            Here I could have used a constant indent variable instead of typing out 35 every time I set cursorposition
+             */
             for (int i = 0; i < details.Count; i++)
             {
                 Console.SetCursorPosition(35, top);
                 if (details.ElementAt(i).Key == "Hobby" && temporaryHobbyString.Length > 50)
                 {
-
+                    //YellowW is printed with Console.Write and Yellow is printed with Console.WriteLine
                     Print.YellowW(details.ElementAt(i).Key);
                     Console.WriteLine($": {details.ElementAt(i).Value}");
 
@@ -130,14 +137,14 @@ namespace classmates.ObjectClasses
             Console.ReadKey();
         }
 
-        private string LookForWhiteSpaceInMotivation(string motivation)
+        private string LookForWhiteSpace(string stringWithWhitespace)
         {
             StringBuilder str = new StringBuilder();
             int counter = 0;
-            for (int i = 0; i < motivation.Length; i++)
+            for (int i = 0; i < stringWithWhitespace.Length; i++)
             {
                 counter++;
-                if (char.IsWhiteSpace(motivation[i]) && i > 30)
+                if (char.IsWhiteSpace(stringWithWhitespace[i]) && i > 30)
                 {
                     if (counter > 42)
                     {
@@ -155,7 +162,7 @@ namespace classmates.ObjectClasses
                 }
                 else
                 {
-                    str.Append(motivation[i]);
+                    str.Append(stringWithWhitespace[i]);
                 }
             }
 
@@ -170,7 +177,7 @@ namespace classmates.ObjectClasses
         public static void Populate(List<Classmates> myClassmates)
         {
 
-            Console.Clear();
+            
             myClassmates.Add(new Classmates("Tobias Binett",
                 31,
                 192,

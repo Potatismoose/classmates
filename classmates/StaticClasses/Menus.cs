@@ -18,6 +18,7 @@ namespace classmates.StaticClasses
             "Infotext om mina klasskamrater",
             "Redigera en klasskamrat",
             "Ta bort en klasskamrat",
+            "Återställ all mockdata",
             "Avsluta programmet" };
 
         private static List<string> listAllClassmatesMenu = new List<string>() {
@@ -62,8 +63,19 @@ namespace classmates.StaticClasses
                     case 4:
                         break;
                     case 5:
+                        RemoveMenu(listOfClassmates, listBasicClassmatesMenu);
                         break;
                     case 6:
+                        listOfClassmates.Clear();
+                        Classmates.Populate(listOfClassmates);
+                        FileHandling.BinarySerializer(listOfClassmates);
+                        top = startMenu.Count + 11;
+                        left = 0;
+                        Console.SetCursorPosition(left, top);
+                        Print.Red("Mockdata återställd");
+                        Thread.Sleep(1500);
+                        break;
+                    case 7:
                         Environment.Exit(0);
                         break;
                     case 0:
@@ -182,7 +194,7 @@ namespace classmates.StaticClasses
                             break;
                     }
                 }
-
+                
                 if (convertedInput != 100)
                 {
                     switch (convertedInput)
@@ -198,8 +210,15 @@ namespace classmates.StaticClasses
                         case 8:
                         case 9:
                         case 10:
-                            
+                            if (convertedInput > listOfClassmates.Count)
+                            {
+                                Console.SetCursorPosition(left, top);
+                                Print.Red("Felaktigt val, försök igen");
+                            }
+                            else 
+                            { 
                             listOfClassmates[convertedInput - 1].ShowDetails();
+                            }
                             break;
                         default:
                             top = listAllClassmatesMenu.Count + 12;
@@ -384,9 +403,95 @@ namespace classmates.StaticClasses
 
         }
 
-        public static void RemoveMenu()
+        public static void RemoveMenu(List<Classmates> listOfClassmates, List<string> menuList)
         {
+            do
+            {
+                top = menuList.Count + 6;
+                left = 35;
+                FileHandling.LogoPrint("remove");
+                PrintMenu(menuList);
 
+                Console.SetCursorPosition(left, top);
+                Print.Yellow($"Välj person att ta bort:");
+                for (int i = 0; i < listOfClassmates.Count; i++)
+                {
+                    top++;
+                    Console.SetCursorPosition(left, top);
+                    Console.WriteLine($"{i + 1}. {listOfClassmates[i].Name}");
+                }
+                top = menuList.Count + 11;
+                left = 0;
+                Console.SetCursorPosition(left, top);
+                Print.Blue(@"Ange ett alternativ \>");
+                string userInput = Console.ReadLine().ToLower();
+                int convertedInput = 100;
+                try
+                {
+                    convertedInput = Convert.ToInt32(userInput);
+                }
+                catch
+                {
+
+                    switch (userInput)
+                    {
+
+                        case "b":
+                            StartMenu(listOfClassmates);
+                            break;
+                        case "a":
+                            Environment.Exit(0);
+                            break;
+
+                        default:
+                            top = listAllClassmatesMenu.Count + 12;
+                            left = 0;
+                            Console.SetCursorPosition(left, top);
+                            Print.Red("Felaktigt val, försök igen");
+                            Thread.Sleep(1500);
+
+                            break;
+                    }
+                }
+
+                if (convertedInput != 100)
+                {
+                    switch (convertedInput)
+                    {
+
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                        case 6:
+                        case 7:
+                        case 8:
+                        case 9:
+                        case 10:
+                            if (convertedInput > listOfClassmates.Count)
+                            {
+                                Console.SetCursorPosition(left, top);
+                                Print.Red("Felaktigt val, försök igen");
+                            }
+                            else
+                            {
+                                listOfClassmates.RemoveAt(convertedInput-1);
+                                FileHandling.BinarySerializer(listOfClassmates);
+                            }
+                            break;
+                        default:
+                            top = listAllClassmatesMenu.Count + 12;
+                            left = 0;
+                            Console.SetCursorPosition(left, top);
+                            Print.Red("Felaktigt val, försök igen");
+                            Thread.Sleep(1500);
+
+                            break;
+
+                    }
+                }
+            } while (true);
         }
 
         public static void DetailsMenu()
