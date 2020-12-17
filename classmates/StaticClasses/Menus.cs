@@ -59,10 +59,10 @@ namespace classmates.StaticClasses
                         Menus.ListDetailsClassmates(listOfClassmates, listBasicClassmatesMenu);
                         break;
                    
-                    case 5:
+                    case 3:
                         RemoveMenu(listOfClassmates, listBasicClassmatesMenu);
                         break;
-                    case 6:
+                    case 4:
                         listOfClassmates.Clear();
                         Classmates.Populate(listOfClassmates);
                         FileHandling.BinarySerializer(listOfClassmates);
@@ -72,7 +72,7 @@ namespace classmates.StaticClasses
                         Print.Yellow("Mockdata återställd");
                         Thread.Sleep(1500);
                         break;
-                    case 7:
+                    case 5:
                         Environment.Exit(0);
                         break;
                     case 0:
