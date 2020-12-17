@@ -37,12 +37,12 @@ namespace classmates.ObjectClasses
 
         //Constructor for the classmates. Used when mockdata is added
         public Classmates(
-            string name, 
-            int age, 
-            int length, 
-            string city, 
-            string hobbie, 
-            string favouriteFood, 
+            string name,
+            int age,
+            int length,
+            string city,
+            string hobbie,
+            string favouriteFood,
             string favouriteBeverage,
             string favouriteBand,
             int noOfChildren,
@@ -70,7 +70,7 @@ namespace classmates.ObjectClasses
             string temporaryHobbyString = LookForWhiteSpace(hobbie);
             string temporaryBandString = LookForWhiteSpace(favouriteBand);
 
-            //Dictionary containing the "heading" for the line and the info that should be written out
+            //Dictionary containing the "heading" for the line and the info paired to the heading that should be written out
             Dictionary<string, object> details = new Dictionary<string, object>{
                 { "Namn",name },
                 { "Ålder", age },
@@ -86,9 +86,9 @@ namespace classmates.ObjectClasses
 
 
             int top = Console.CursorTop + 6;
-            
+
             /*For loop that prints out the data. Cursor position is moved
-            diferrently depending on how many chars the string contains.
+            differently depending on how many chars the string contains.
             Here I could have used a constant indent variable instead of typing out 35 every time I set cursorposition
              */
             for (int i = 0; i < details.Count; i++)
@@ -101,7 +101,7 @@ namespace classmates.ObjectClasses
                     Console.WriteLine($": {details.ElementAt(i).Value}");
 
                     if (temporaryHobbyString.Length > 50 && temporaryHobbyString.Length < 130)
-                    { 
+                    {
                         top += 1;
                     }
                     else if (temporaryHobbyString.Length > 130)
@@ -130,9 +130,9 @@ namespace classmates.ObjectClasses
                 }
                 top += 1;
             }
-            
+
             Console.WriteLine();
-            Console.SetCursorPosition(35, top+6);
+            Console.SetCursorPosition(35, top + 6);
             Print.Blue("Enter = Fortsätt");
             Console.ReadKey();
         }
@@ -166,7 +166,7 @@ namespace classmates.ObjectClasses
                 }
             }
 
-                
+
             return str.ToString();
         }
 
@@ -177,7 +177,7 @@ namespace classmates.ObjectClasses
         public static void Populate(List<Classmates> myClassmates)
         {
 
-            
+
             myClassmates.Add(new Classmates("Tobias Binett",
                 31,
                 192,

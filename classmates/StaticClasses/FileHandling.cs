@@ -53,13 +53,15 @@ namespace classmates.StaticClasses
                     saveFile.Close();
                 }
             }
-            else {
+            else
+            {
                 Directory.CreateDirectory(pathway);
             }
-            
+
             return false;
         }
-        public static int CheckFileFolderExistance (){
+        public static int CheckFileFolderExistance()
+        {
 
 
             bool fileAndFolderExisting = default(bool);
@@ -135,16 +137,17 @@ namespace classmates.StaticClasses
          ----------------------------------------------------------------------*/
 
         //Writes the logos for main, edit and remove to hard drive
-        public static void CreateLogos() {
+        public static void CreateLogos()
+        {
             using FileStream main = File.Create(pathwayToMainLogo);
+            main.Close();
             using FileStream remove = File.Create(pathwayToRemoveLogo);
+            remove.Close();
             using FileStream edit = File.Create(pathwayToEditLogo);
-            using FileStream details = File.Create(pathwayToDetailsLogo);
-            using FileStream info = File.Create(pathwayToInfoLogo);
-            main.Close(); 
-            remove.Close(); 
             edit.Close();
+            using FileStream details = File.Create(pathwayToDetailsLogo);
             details.Close();
+            using FileStream info = File.Create(pathwayToInfoLogo);
             info.Close();
 
             string[] mainLogoSave = {
@@ -166,11 +169,9 @@ namespace classmates.StaticClasses
             }
 
 
-
-
             string[] infoLogoSave = {
-                ",--. ,--.                ,--.      ,--.         ,---.   ", 
-                "|  .'   / ,---. ,--.--.,-'  '-.    `--',--,--, /  .-' ,---.",  
+                ",--. ,--.                ,--.      ,--.         ,---.   ",
+                "|  .'   / ,---. ,--.--.,-'  '-.    `--',--,--, /  .-' ,---.",
                 @"|  .   ' | .-. ||  .--''-.  .-'    ,--.|      \|  `-,| .-. |",
                 @"|  |\   \' '-' '|  |     |  |      |  ||  ||  ||  .-'' '-' ' ",
                 "`--' '--' `---' `--'     `--'      `--'`--''--'`--'   `---'"
@@ -185,8 +186,6 @@ namespace classmates.StaticClasses
                     file.WriteLine(line);
                 }
             }
-
-
 
 
             string[] removeLogoSave = {
@@ -244,13 +243,6 @@ namespace classmates.StaticClasses
                     file.WriteLine(line);
                 }
             }
-
-
-
-
-
-
-
         }
 
         //Method for printing the logo
@@ -286,12 +278,13 @@ namespace classmates.StaticClasses
                 }
                 Print.Yellow(line);
             }
+            //Prints out a line thats as long as the longest line in the logo textfile.
             for (int i = 0; i < longest; i++)
             {
                 Console.Write("_");
             }
-            
-            
+
+
         }
 
         /*----------------------------------------------------------------------

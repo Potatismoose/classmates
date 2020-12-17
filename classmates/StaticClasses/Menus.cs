@@ -12,8 +12,8 @@ namespace classmates.StaticClasses
         private static int left = 35;
         private static int top = 7;
 
-        private static List<string> startMenu = new List<string>() { 
-            "Lista alla klasskamrater", 
+        private static List<string> startMenu = new List<string>() {
+            "Lista alla klasskamrater",
             "Detaljer om klasskamrater",
             "Infotext om mina klasskamrater",
             "Redigera en klasskamrat",
@@ -37,7 +37,7 @@ namespace classmates.StaticClasses
 
         public static void StartMenu(List<Classmates> listOfClassmates)
         {
-            
+
             do
             {
                 Console.Clear();
@@ -58,7 +58,7 @@ namespace classmates.StaticClasses
                         Menus.ListDetailsClassmates(listOfClassmates, listBasicClassmatesMenu);
                         break;
                     case 3:
-                        
+
                         break;
                     case 4:
                         break;
@@ -72,7 +72,7 @@ namespace classmates.StaticClasses
                         top = startMenu.Count + 11;
                         left = 0;
                         Console.SetCursorPosition(left, top);
-                        Print.Red("Mockdata återställd");
+                        Print.Yellow("Mockdata återställd");
                         Thread.Sleep(1500);
                         break;
                     case 7:
@@ -85,13 +85,13 @@ namespace classmates.StaticClasses
                         Console.SetCursorPosition(left, top);
                         Print.Red("Felaktigt val, försök igen");
                         Thread.Sleep(1500);
-                        
+
                         break;
 
-                } 
+                }
             } while (true);
         }
-
+        //Menu for listing persons in my class
         public static void ListAllClassmates(List<Classmates> listOfClassmates)
         {
             do
@@ -111,39 +111,45 @@ namespace classmates.StaticClasses
                     Console.SetCursorPosition(left, top);
                     Console.WriteLine($"{listOfClassmates[i].Name}, {listOfClassmates[i].Age} år");
                 }
-                top = listAllClassmatesMenu.Count+10;
+                if (listOfClassmates.Count == 0)
+                {
+                    Console.SetCursorPosition(left, top);
+                    Print.Yellow("Inga personer finns i klassen                ");
+                }
+                top = listAllClassmatesMenu.Count + 10;
                 left = 0;
                 Console.SetCursorPosition(left, top);
                 Print.Blue(@"Ange ett alternativ \>");
 
                 string userInput = Console.ReadLine().ToLower();
-            
-          
 
-                    switch (userInput)
-                    {
 
-                        case "b":
-                            StartMenu(listOfClassmates);
-                            break;
-                        case "a":
-                            Environment.Exit(0);
-                            break;
 
-                        default:
-                            top = listAllClassmatesMenu.Count + 11;
-                            left = 0;
-                            Console.SetCursorPosition(left, top);
-                            Print.Red("Felaktigt val, försök igen");
-                            Thread.Sleep(1500);
-                            ListAllClassmates(listOfClassmates);
-                            break;
-                    }
+                switch (userInput)
+                {
+
+                    case "b":
+                        StartMenu(listOfClassmates);
+                        break;
+                    case "a":
+                        Environment.Exit(0);
+                        break;
+
+                    default:
+                        top = listAllClassmatesMenu.Count + 11;
+                        left = 0;
+                        Console.SetCursorPosition(left, top);
+                        Print.Red("Felaktigt val, försök igen");
+                        Thread.Sleep(1500);
+                        ListAllClassmates(listOfClassmates);
+                        break;
+                }
 
             } while (true);
- 
+
         }
 
+        //Menu for listing details of my classmates
         public static void ListDetailsClassmates(List<Classmates> listOfClassmates, List<string> menuList)
         {
             do
@@ -151,9 +157,11 @@ namespace classmates.StaticClasses
                 top = menuList.Count + 6;
                 left = 35;
                 FileHandling.LogoPrint("details");
+                //Prints menu
                 PrintMenu(menuList);
 
                 Console.SetCursorPosition(left, top);
+                //List all the classmates from listOfClassmates
                 Print.Yellow($"Visa info om:");
                 for (int i = 0; i < listOfClassmates.Count; i++)
                 {
@@ -161,12 +169,18 @@ namespace classmates.StaticClasses
                     Console.SetCursorPosition(left, top);
                     Console.WriteLine($"{i + 1}. {listOfClassmates[i].Name}");
                 }
+                if (listOfClassmates.Count == 0)
+                {
+                    Console.SetCursorPosition(left, top);
+                    Print.Yellow("Inga personer finns i klassen");
+                }
                 top = menuList.Count + 11;
                 left = 0;
                 Console.SetCursorPosition(left, top);
                 Print.Blue(@"Ange ett alternativ \>");
                 string userInput = Console.ReadLine().ToLower();
                 int convertedInput = 100;
+                //Try Catch for checking if the user pressed an integer button or chars 'a' or 'b'
                 try
                 {
                     convertedInput = Convert.ToInt32(userInput);
@@ -194,7 +208,7 @@ namespace classmates.StaticClasses
                             break;
                     }
                 }
-                
+
                 if (convertedInput != 100)
                 {
                     switch (convertedInput)
@@ -215,9 +229,9 @@ namespace classmates.StaticClasses
                                 Console.SetCursorPosition(left, top);
                                 Print.Red("Felaktigt val, försök igen");
                             }
-                            else 
-                            { 
-                            listOfClassmates[convertedInput - 1].ShowDetails();
+                            else
+                            {
+                                listOfClassmates[convertedInput - 1].ShowDetails();
                             }
                             break;
                         default:
@@ -226,11 +240,11 @@ namespace classmates.StaticClasses
                             Console.SetCursorPosition(left, top);
                             Print.Red("Felaktigt val, försök igen");
                             Thread.Sleep(1500);
-                            
+
                             break;
 
                     }
-                } 
+                }
             } while (true);
         }
 
@@ -321,7 +335,7 @@ namespace classmates.StaticClasses
         {
             //List that´s used if the menu is only 2 counts long. That menu is used only if the user has the
             //list of classmates to choose from AND want´s to use characters to navigate back to menu or quit program
-            List<char> abc = new List<char>(){ 'b','a'};
+            List<char> abc = new List<char>() { 'b', 'a' };
             do
             {
                 Console.WriteLine();
@@ -339,18 +353,19 @@ namespace classmates.StaticClasses
                     if (menuList.Count <= 2)
                     {
                         Console.WriteLine();
-                        
+
                         if (i == menuList.Count - 1)
                         {
-                            
+
                             Print.Blue($"{abc[i]}. {menuList[i]}");
                             for (int j = 0; j < longestEntity + 4; j++)
                             {
                                 Console.Write("_");
                             }
-                            
+
                         }
-                        else {
+                        else
+                        {
                             Print.Blue($"{abc[i]}. {menuList[i]}");
                         }
                     }
@@ -358,7 +373,7 @@ namespace classmates.StaticClasses
 
                     else if (i == 0 && menuList.Count != 1)
                     {
-                        
+
                         Console.WriteLine();
 
                         Print.Blue($"{i + 1}. {menuList[i]}");
@@ -407,7 +422,7 @@ namespace classmates.StaticClasses
         {
             do
             {
-                top = menuList.Count + 6;
+                top = menuList.Count + 5;
                 left = 35;
                 FileHandling.LogoPrint("remove");
                 PrintMenu(menuList);
@@ -419,6 +434,11 @@ namespace classmates.StaticClasses
                     top++;
                     Console.SetCursorPosition(left, top);
                     Console.WriteLine($"{i + 1}. {listOfClassmates[i].Name}");
+                }
+                if (listOfClassmates.Count == 0)
+                {
+                    Console.SetCursorPosition(left, top);
+                    Print.Yellow("Inga personer finns i klassen");
                 }
                 top = menuList.Count + 11;
                 left = 0;
@@ -476,7 +496,7 @@ namespace classmates.StaticClasses
                             }
                             else
                             {
-                                listOfClassmates.RemoveAt(convertedInput-1);
+                                listOfClassmates.RemoveAt(convertedInput - 1);
                                 FileHandling.BinarySerializer(listOfClassmates);
                             }
                             break;

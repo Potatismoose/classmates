@@ -20,7 +20,7 @@ namespace classmates
 
         public static bool UserLogin()
         {
-            
+
             //Method that prints out the logo, checks the input password and log in the user if correct.
 
             bool loggedIn = default(bool);
@@ -29,29 +29,29 @@ namespace classmates
             int maxLoginTries = 3;
             do
             {
-                
+
                 Console.Clear();
                 FileHandling.LogoPrint("start");
 
                 //If wrong password, errormessage is printed in red as long as logincount is less than maxLoginTries.
-                if (!string.IsNullOrEmpty(error) && loginCount <maxLoginTries)
+                if (!string.IsNullOrEmpty(error) && loginCount < maxLoginTries)
                 {
-                    
+
                     Console.SetCursorPosition(15, 10);
                     Print.Red(error);
                     error = default(string);
-                    loginCount++;
-                    
+
+
                 }
                 Console.SetCursorPosition(15, 7);
                 var pass = default(string);
                 ConsoleKey key;
-                Console.WriteLine("Ange lösenordet (eller q för att avsluta)");
+                Print.Yellow("Ange lösenordet (eller \"a\" för att avsluta)");
                 Console.SetCursorPosition(15, 8);
-                Print.Grey(@"Lösenord \> ");
+                Print.Blue(@"Lösenord \> ");
                 Console.SetCursorPosition(26, 8);
 
-                
+
                 /*
                  If logincount is 3 or more, print out that the program will stop, and then exit the program after 3 seconds.
                  */
@@ -62,6 +62,7 @@ namespace classmates
                     Thread.Sleep(3000);
                     Environment.Exit(0);
                 }
+
 
                 /*Do while that checks the keys that the user presses and overrides that key
                  * and prints an * insted. Real password gets saved into pass variable and then checked in a switch case.
@@ -102,18 +103,22 @@ namespace classmates
                         case "1":
                             loggedIn = true;
                             Console.SetCursorPosition(15, 10);
-                            Print.Green("Korrekt lösenord, du loggas nu in");
+                            Print.Yellow("Korrekt lösenord, du loggas nu in");
                             Thread.Sleep(2000);
-
                             break;
-                        case "q":
+                        case "a":
                             Environment.Exit(0);
                             break;
 
                         case null:
                         default:
+                            loginCount++;
                             error = "Fel lösenord, försök igen";
-                            
+                            if (loginCount == 2)
+                            {
+                                error = string.Concat(error, " din förbannade säck med älgknän.");
+                            }
+
 
                             break;
                     }

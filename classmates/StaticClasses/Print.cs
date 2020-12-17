@@ -40,7 +40,7 @@ namespace classmates.StaticClasses
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(text);
             Console.ResetColor();
-        
+
         }
         public static void Blue(string text)
         {
