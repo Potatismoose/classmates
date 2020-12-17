@@ -102,7 +102,6 @@ namespace classmates.StaticClasses
         {
             //Startar en filestream och skapar en BinaryFormatter som jag döper till bd
             FileStream fileStream;
-            
             BinaryFormatter bf = new BinaryFormatter();
             fileStream = File.Create(pathwayFull);
             bf.Serialize(fileStream, list);

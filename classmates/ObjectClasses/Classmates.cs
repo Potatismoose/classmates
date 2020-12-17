@@ -137,6 +137,7 @@ namespace classmates.ObjectClasses
             Console.ReadKey();
         }
 
+        //Method for making a line break after a certain number of characters in a string.
         private string LookForWhiteSpace(string stringWithWhitespace)
         {
             StringBuilder str = new StringBuilder();
@@ -286,5 +287,8 @@ namespace classmates.ObjectClasses
                 "Att lära sig ett nytt yrke helt från grunden som känns givande."));
 
         }
+        /*-------------------------------------------------------------------------------------
+         [END OF]    STATIC METHOD FOR POPULATING LIST WITH CLASSMATES FIRST TIME PROGRAM RUNS
+        --------------------------------------------------------------------------------------*/
     }
 }
